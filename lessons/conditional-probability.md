@@ -1,153 +1,101 @@
 # Conditional probability
 
-A condition affects 1 person in 100. A test for it comes back positive for 9
-in 10 people who have the condition, and for 1 in 20 people who do not.
+A conditional probability is the probability of an event, given that another
+event is known to have happened. Knowing that the second event happened rules
+out some outcomes, so the probability can change.
 
-A person tests positive. How likely is it that they have the condition?
+This lesson uses one example. A condition affects 1 person in 100, and there
+is a test for it. Of the people who have the condition, 9 in 10 test
+positive. Of the people who do not have it, 1 in 10 test positive. A person
+tests positive. We want the probability
+that this person has the condition, given the positive test.
 
-> Before computing anything, write down a guess. Is it closer to 90%, 50%, or
-> 10%?
+## Count the people
 
-## Counting the people who test positive
+We find this probability first for a crowd, because people in a crowd can be
+counted. In the figure, 1000 people take the test one after another.
 
-The question is about one person, but we answer it first for a crowd, because
-people in a crowd can be counted. Suppose 2000 people take the test, and
-suppose the shares come out exactly as stated.
+::visual{name="diagnostic-test-crowd"}
 
-- 1 person in 100 has the condition, so 20 people have it and 1980 do not.
-- Of the 20 who have it, 9 in 10 test positive, so 18 test positive and 2
-  test negative.
-- Of the 1980 who do not, 1 in 20 test positive, so 99 test positive and 1881
-  test negative.
+We look only at the two positive stacks, because we know the person tested
+positive. At the end, 9 of these people have the condition and 99 do not.
+So 9 of the 108 people who test positive have the condition, which is about
+8%.
 
-| | Tests positive | Tests negative | Total |
-|---|---|---|---|
-| Has the condition | 18 | 2 | 20 |
-| Does not have the condition | 99 | 1881 | 1980 |
-| Total | 117 | 1883 | 2000 |
+A positive test for a person who does not have the condition is called a
+false positive. Only 1 in 10 of the people without the condition get one, and
+9 in 10 of the people with the condition test positive. However, only 1
+person in 100 has the condition, which is 10 of the 1000 people. The positive
+tests from people with the condition and the false positives are therefore
 
-We are told that the person tested positive, so the person is one of the 117
-people in the first column. The other 1883 people are ruled out. Of those 117
-people, 18 have the condition. The answer is therefore
-
-$$\frac{18}{117} = \frac{2}{13},$$
-
-which is about 15%.
-
-The test is right for 9 in 10 people who have the condition, and still most
-people who test positive do not have it. The table shows the reason. Far more
-people are without the condition than with it (1980 against 20). A small
-share of the large group (99 people) is therefore larger than a large share
-of the small group (18 people).
+$$\frac{9}{10} \times 10 = 9 \qquad\text{and}\qquad \frac{1}{10} \times 990 = 99.$$
 
 ## The definition
 
-Counting works when there is a crowd to count. We want a rule that uses
-probabilities alone, so that it applies to any experiment (e.g., rolling dice
-or drawing cards).
+Let $A$ and $B$ be events with $P(B) > 0$. The conditional probability of $A$
+given $B$ is
 
-The count had two steps. First we kept only the people who tested positive.
-Then, among those people, we took the share who have the condition. We now
-write the same two steps with probabilities.
+$$P(A \mid B) = \frac{P(A \cap B)}{P(B)},$$
 
-Choose one of the 2000 people at random. Let $D$ be the event that the person
-has the condition, and let $T$ be the event that the person tests positive.
-The event that both happen is written $D \cap T$. Each person is equally
-likely to be chosen, so
+where $A \cap B$ is the event that both happen. The denominator keeps only
+the outcomes in $B$, and the numerator keeps the outcomes of $A$ that are
+also in $B$.
 
-$$P(T) = \frac{117}{2000} \quad \text{and} \quad P(D \cap T) = \frac{18}{2000}.$$
+We apply the definition to the count. Choose one of the 1000 people at
+random. Let $D$ be the event that the person has the condition, and let $T$
+be the event that the person tests positive. Then $P(D \mid T)$ is the
+probability that the person has the condition, given that the person tested
+positive. This is the probability we want.
 
-Dividing the second probability by the first gives the answer from the count,
-because the 2000 cancels:
+Of the 1000 people, 108 test positive, and 9 both have the condition and
+test positive. So $P(T) = 108/1000$ and $P(D \cap T) = 9/1000$, and the
+definition gives
 
-$$\frac{P(D \cap T)}{P(T)} = \frac{18/2000}{117/2000} = \frac{18}{117} = \frac{2}{13}.$$
+$$P(D \mid T) = \frac{9/1000}{108/1000} = \frac{9}{108} = \frac{1}{12}.$$
 
-This ratio is the definition. Let $A$ and $B$ be events with $P(B) > 0$. The
-conditional probability of $A$ given $B$ is
+Of the people who test positive, 1 in 12 has the condition. This is the
+share from the count, because the 1000 cancels.
 
-$$P(A \mid B) = \frac{P(A \cap B)}{P(B)}.$$
+## The tree
 
-The denominator keeps only the outcomes in $B$. The numerator keeps the
-outcomes of $A$ that are also in $B$. The definition requires $P(B) > 0$
-because we cannot divide by zero.
+A probability tree is a diagram of every possible outcome when events happen
+one after another. It branches once for each result an event can have, so
+each path from the start to an end is one possible outcome.
 
-In this notation, the answer to the opening question is $P(D \mid T) = 2/13$.
+Each branch carries the probability of its result, given the branches before
+it. The probability of a path is the product of the probabilities along it.
+This is the multiplication rule, which is the definition with both sides
+multiplied by $P(B)$:
 
-## The multiplication rule
+$$P(A \cap B) = P(B)\,P(A \mid B).$$
 
-The opening question does not give $P(D \cap T)$. It gives $P(D) = 1/100$, and
-it gives the probability of a positive test for a person who has the
-condition, which is the conditional probability $P(T \mid D) = 9/10$. We
-therefore need a way to get $P(D \cap T)$ from these two numbers.
+We draw the tree for the test. The first event is whether the person has the
+condition, and the second event is the test result. The three numbers we were
+given go on the branches:
 
-The definition provides it. By the definition,
-$P(T \mid D) = P(D \cap T) / P(D)$. Multiplying both sides by $P(D)$ gives
+- $P(D) = 1/100$ is the probability that the person has the condition.
+- $P(T \mid D) = 9/10$ is the probability of a positive test, given that the
+  person has the condition.
+- $P(T \mid D^c) = 1/10$ is the probability of a positive test, given that
+  the person does not have the condition. $D^c$ is the event that the person
+  does not have it.
 
-$$P(D \cap T) = P(D)\,P(T \mid D).$$
+> Draw this tree on paper, with a probability on every branch and the product
+> at the end of every path. Then compare it with the figure.
 
-We call this the multiplication rule. It states that the probability that two
-events both happen is the probability of the first, times the probability of
-the second given the first. For the test,
+::visual{name="probability-tree" one="person" slider="yes" first="has the condition" not-first="does not" first-symbol="D" probability="1/100" second="positive" not-second="negative" second-symbol="T" probability-if-first="9/10" probability-if-not="1/10"}
 
-$$P(D \cap T) = \frac{1}{100} \cdot \frac{9}{10} = \frac{9}{1000},$$
+Two paths end in a positive test, and no person follows both, so we add
+their probabilities: $P(T) = 9/1000 + 99/1000 = 108/1000$. Only the first of
+the two goes through the condition, so $P(D \cap T) = 9/1000$, and the
+definition gives
 
-which equals the $18/2000$ from the count.
+$$P(D \mid T) = \frac{9/1000}{108/1000} = \frac{1}{12}.$$
 
-## Tree diagrams
+This is the answer from the count. The tree needed no crowd, only the three
+probabilities.
 
-The test is an experiment in two stages. First the person has the condition
-or does not, and then the test is positive or negative. An experiment in
-stages can be drawn as a tree, with one branch for each thing that can happen
-at each stage. On each branch we write the probability of that step given the
-steps before it.
-
-A path is a route from the start of the tree to one of its ends (e.g., the
-person has the condition and then tests positive). By the multiplication
-rule, the probability of a path is the product of the probabilities along it.
-
-The figure below is the tree for the test. We write $D^c$ for the event that
-the person does not have the condition, and $T^c$ for the event that the test
-is negative.
-
-::visual{name="diagnostic-test-tree"}
-
-Each run of the simulation chooses one person at random and follows one path.
-The share of runs on each path is close to the product along that path, and
-not exactly equal to it, because the people are chosen at random.
-
-The tree has four paths.
-
-| Path | Probability |
-|---|---|
-| $D$, then $T$ | $\frac{1}{100} \cdot \frac{9}{10} = \frac{9}{1000}$ |
-| $D$, then $T^c$ | $\frac{1}{100} \cdot \frac{1}{10} = \frac{1}{1000}$ |
-| $D^c$, then $T$ | $\frac{99}{100} \cdot \frac{1}{20} = \frac{99}{2000}$ |
-| $D^c$, then $T^c$ | $\frac{99}{100} \cdot \frac{19}{20} = \frac{1881}{2000}$ |
-
-Every person follows exactly one of the four paths, so the four probabilities
-add to 1. We check this on every tree, because a sum other than 1 means that
-a branch is wrong. Here the sum is
-
-$$\frac{18}{2000} + \frac{2}{2000} + \frac{99}{2000} + \frac{1881}{2000} = 1.$$
-
-## Answering the question from the tree
-
-We can now answer the opening question without counting people. A positive
-test happens along two paths, and no person follows both, so we add their
-probabilities:
-
-$$P(T) = \frac{9}{1000} + \frac{99}{2000} = \frac{117}{2000}.$$
-
-Only the first of these two paths has the condition, so
-$P(D \cap T) = 9/1000$. By the definition,
-
-$$P(D \mid T) = \frac{P(D \cap T)}{P(T)} = \frac{9/1000}{117/2000} = \frac{2}{13}.$$
-
-This is the same answer as the count, and it uses only the three
-probabilities given in the question.
-
-> $P(T \mid D) = 9/10$ and $P(D \mid T) = 2/13$. Say in words what each one
-> measures, and who would care about each.
-
-> Suppose the condition affects 1 person in 10 instead of 1 in 100. Redraw
-> the tree and find $P(D \mid T)$.
+The two conditional probabilities in this lesson are different.
+$P(T \mid D) = 9/10$ is the probability of a positive test for a person who
+has the condition. $P(D \mid T) = 1/12$ is the probability of the condition
+for a person who tests positive.

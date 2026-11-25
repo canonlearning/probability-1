@@ -2,7 +2,7 @@
 
 A first university course in probability, from
 [Canon Learning](https://github.com/canonlearning/canon). One lesson is
-written so far.
+written so far, with two interactive visuals.
 
 ## Layout
 
@@ -10,6 +10,8 @@ written so far.
   the problems on its practice quiz.
 - `lessons/` has one Markdown file per lesson. The first line is the title.
 - `problems/` has one Markdown file per problem, with its worked solution.
+- `visuals/` has one TypeScript file per interactive visual. A lesson places
+  `visuals/crowd.ts` with the line `::visual{name="crowd"}`.
 
 ## Preview
 
@@ -22,8 +24,7 @@ ordinary dependency and this repository can be cloned on its own. Then, in this 
 - `npm run build` writes the site to `dist/`.
 
 Each lesson ends with its practice problems and a link to its practice quiz,
-which is a page to print, with the answer key on its own sheet. The interactive visuals are not
-built yet, so a visual appears as an empty box.
+which is a page to print, with the answer key on its own sheet.
 
 ## Graded quizzes
 

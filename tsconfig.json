@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "lib": [
+      "es2023",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [],
+    "paths": {
+      "canon": [
+        "../canon/src/visual/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "visuals"
+  ]
+}
