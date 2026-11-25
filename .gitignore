@@ -1,2 +1,5 @@
 dist/
 node_modules/
+
+# A teacher's own graded quizzes. Never published.
+private/

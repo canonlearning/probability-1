@@ -6,8 +6,8 @@ written so far.
 
 ## Layout
 
-- `course.yaml` lists the lessons, the practice problems for each lesson, and
-  the quizzes.
+- `course.yaml` lists the lessons, and for each one its practice problems and
+  the problems on its practice quiz.
 - `lessons/` has one Markdown file per lesson. The first line is the title.
 - `problems/` has one Markdown file per problem, with its worked solution.
 
@@ -21,8 +21,31 @@ ordinary dependency and this repository can be cloned on its own. Then, in this 
   page when a file is saved.
 - `npm run build` writes the site to `dist/`.
 
-Problems and the interactive visuals are not shown yet. A visual appears as
-an empty box.
+Each lesson ends with its practice problems and a link to its practice quiz,
+which is a page to print, with the answer key on its own sheet. The interactive visuals are not
+built yet, so a visual appears as an empty box.
+
+## Graded quizzes
+
+The practice quizzes are published with their answer keys, so they are not
+for grading. A graded quiz goes in a `private/` folder, which git ignores, so
+it is never published:
+
+- `private/problems/` holds the teacher's own problems, in the same format as
+  `problems/`. The quickest way to write one is to copy a public problem and
+  change it.
+- `private/quizzes.yaml` lists the quizzes:
+
+  ```yaml
+  quizzes:
+    - id: quiz-1
+      title: Quiz 1
+      problems:
+        - my-own-problem
+  ```
+
+`npm run dev` shows private quizzes on the home page, ready to print.
+`npm run build` leaves them out.
 
 ## License
 

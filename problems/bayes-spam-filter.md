@@ -3,7 +3,7 @@ id: bayes-spam-filter
 title: A flagged email
 topic: bayes-rule
 difficulty: 2
-answer: 4/13
+answer: $4/13$
 ---
 
 One in ten emails that arrive at an inbox is spam. A filter flags a spam email

@@ -1,15 +1,15 @@
 title: Probability 1
 description: A first university course in probability.
 
-# The practice problems for a lesson are listed here, and the site shows them
-# at the end of the lesson page.
+# For each lesson:
+#   problems       the practice problems shown at the end of the lesson
+#   practice_quiz  the problems on the lesson's printable practice quiz
+#
+# A practice quiz is published with its answer key, so it is for study and
+# not for grading. Graded quizzes go in private/quizzes.yaml (see README).
 lessons:
   - id: conditional-probability
     problems:
       - bayes-spam-filter
-
-quizzes:
-  - id: quiz-conditional-probability
-    title: "Quiz: conditional probability"
-    problems:
+    practice_quiz:
       - bayes-spam-filter
