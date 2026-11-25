@@ -2,12 +2,11 @@
 
 A first university course in probability, from
 [Canon Learning](https://github.com/canonlearning/canon). One lesson is
-written so far, with two interactive visuals.
+written so far, with five practice problems and interactive visuals.
 
 ## Layout
 
-- `course.yaml` lists the lessons, and for each one its practice problems and
-  the problems on its practice quiz.
+- `course.yaml` lists the lessons, and for each one its practice problems.
 - `lessons/` has one Markdown file per lesson. The first line is the title.
 - `problems/` has one Markdown file per problem, with its worked solution.
 - `visuals/` has one TypeScript file per interactive visual. A lesson places
@@ -23,30 +22,13 @@ ordinary dependency and this repository can be cloned on its own. Then, in this 
   page when a file is saved.
 - `npm run build` writes the site to `dist/`.
 
-Each lesson ends with its practice problems and a link to its practice quiz,
-which is a page to print, with the answer key on its own sheet.
+Each lesson ends with its practice problems, each with a worked solution.
 
-## Graded quizzes
+## Quizzes
 
-The practice quizzes are published with their answer keys, so they are not
-for grading. A graded quiz goes in a `private/` folder, which git ignores, so
-it is never published:
-
-- `private/problems/` holds the teacher's own problems, in the same format as
-  `problems/`. The quickest way to write one is to copy a public problem and
-  change it.
-- `private/quizzes.yaml` lists the quizzes:
-
-  ```yaml
-  quizzes:
-    - id: quiz-1
-      title: Quiz 1
-      problems:
-        - my-own-problem
-  ```
-
-`npm run dev` shows private quizzes on the home page, ready to print.
-`npm run build` leaves them out.
+The course publishes no quizzes. Every problem here is public with its
+solution, so a teacher writes a quiz by changing these problems into new
+ones.
 
 ## License
 

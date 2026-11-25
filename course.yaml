@@ -1,15 +1,12 @@
 title: Probability 1
 description: A first university course in probability.
 
-# For each lesson:
-#   problems       the practice problems shown at the end of the lesson
-#   practice_quiz  the problems on the lesson's printable practice quiz
-#
-# A practice quiz is published with its answer key, so it is for study and
-# not for grading. Graded quizzes go in private/quizzes.yaml (see README).
+# For each lesson, `problems` lists the practice problems shown at its end.
 lessons:
   - id: conditional-probability
     problems:
-      - bayes-spam-filter
-    practice_quiz:
+      - dice-sum-eight
+      - choir-and-instruments
+      - at-least-one-six
+      - two-batteries
       - bayes-spam-filter

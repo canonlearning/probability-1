@@ -64,6 +64,10 @@ $$
 Of the people who test positive, 1 in 12 has the condition. This is the
 share from the count, because the 1000 cancels.
 
+The total cancels whenever every outcome is equally likely (each of the 1000
+people, each face of a die). Then $P(A \mid B)$ is the number of outcomes in
+both $A$ and $B$, divided by the number of outcomes in $B$.
+
 ## The tree
 
 A **probability tree** is a diagram of every possible outcome when events

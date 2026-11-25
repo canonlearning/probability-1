@@ -125,7 +125,7 @@ export default class AreaSquare extends Visual {
       labelFrom(1, `${notFirst}<br><b>${text(oneMinus(firstProbability))}</b>`, otherStripMiddle + 0.4, SQUARE.back - 0.1),
       labelFrom(5, `${first}<br><b>${text(answer)}</b>`, BAR.left + firstShareOfBar / 2, -barDepth / 2 - 0.1),
       labelFrom(5, `${notFirst}<br><b>${text(oneMinus(answer))}</b>`, BAR.left + firstShareOfBar + (BAR.width - firstShareOfBar) / 2, -barDepth / 2 - 0.1),
-      labelFrom(5, `every ${second} ${one}`, BAR.left + BAR.width / 2, barDepth / 2 + 0.9),
+      labelFrom(5, `every ${one}: ${second}`, BAR.left + BAR.width / 2, barDepth / 2 + 0.9),
     ];
     // One label per rectangle: the name and height of its cut, and then
     // its area. The labels of the left strip sit outside the square,
