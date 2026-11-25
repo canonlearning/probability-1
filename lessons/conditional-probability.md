@@ -80,8 +80,9 @@ given go on the branches:
   the person does not have the condition. $D^c$ is the event that the person
   does not have it.
 
-> Draw this tree on paper, with a probability on every branch and the product
-> at the end of every path. Then compare it with the figure.
+> **On paper**
+> Draw this tree, with a probability on every branch and the product at the
+> end of every path. Then compare it with the figure.
 
 ::visual{name="probability-tree" one="person" slider="yes" first="has the condition" not-first="does not" first-symbol="D" probability="1/100" second="positive" not-second="negative" second-symbol="T" probability-if-first="9/10" probability-if-not="1/10"}
 
