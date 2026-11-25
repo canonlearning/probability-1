@@ -1,7 +1,4 @@
----
-id: conditional-probability
-title: Conditional probability
----
+# Conditional probability
 
 A condition affects 1 person in 100. A test for it comes back positive for 9
 in 10 people who have the condition, and for 1 in 20 people who do not.

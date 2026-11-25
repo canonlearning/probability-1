@@ -1,0 +1,9 @@
+{
+  "name": "probability-1",
+  "private": true,
+  "description": "Probability 1, a Canon Learning course. The engine is the sibling folder ../canon.",
+  "scripts": {
+    "dev": "node ../canon/src/cli.ts dev",
+    "build": "node ../canon/src/cli.ts build"
+  }
+}
