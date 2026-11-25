@@ -26,9 +26,11 @@ Probability 1 · Lecture slides
 - 470 female, 1731 male
 - 711 survived
 
-> **Notes** The counts are from the British inquiry of 1912, as tabulated
-> by Dawson (1995) in the Journal of Statistics Education. Say nothing
-> about probability yet.
+> **Notes** The counts are from the British Board of Trade inquiry of 1912,
+> as given in Table 2 of Dawson (1995), Journal of Statistics Education 3(3).
+> The table gives the people on board and the deaths, and the survivors are
+> the difference. Other sources differ by a few people. Say nothing about
+> probability yet.
 
 ---
 
