@@ -1,4 +1,4 @@
-# Conditional probability
+# Conditional Probability
 
 A **conditional probability** is the probability of an event, given that
 another event is known to have happened. Knowing that the second event

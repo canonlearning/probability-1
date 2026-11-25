@@ -18,6 +18,7 @@
 
 import {
   dividedBy,
+  evenSteps,
   floor,
   floorPatch,
   fractionFrom,
@@ -138,9 +139,9 @@ export default class AreaSquare extends Visual {
       return label;
     });
 
-    let time = 0;
+    const timeline = figure.timeline(evenSteps(LAST_STEP + 1, STEP_TIME));
     figure.button("Replay", () => {
-      time = 0;
+      timeline.restart();
     });
     figure.caption(
       `The width of a strip is the probability of the first step. The height of a rectangle ` +
@@ -149,7 +150,7 @@ export default class AreaSquare extends Visual {
     );
 
     stage.onFrame = (seconds) => {
-      time += seconds;
+      const time = timeline.advance(seconds);
       const step = Math.min(Math.floor(time / STEP_TIME), LAST_STEP);
       // How far the change that starts at `startStep` has gone, from 0 to 1.
       const changed = (startStep: number) =>

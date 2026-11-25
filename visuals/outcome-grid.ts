@@ -22,7 +22,7 @@
 // Optional: then-given and then-given-name name a second given event. The
 // grid then runs twice, once for each, so the two answers can be compared.
 
-import { block, floor, floorPatch, palette, reduce, Stage, THREE, Visual, type Figure } from "canon";
+import { block, evenSteps, floor, floorPatch, palette, reduce, Stage, THREE, Visual, type Figure } from "canon";
 
 // Timing, in seconds. Step 0 shows the whole grid. Then each given event
 // takes four steps: mark its tiles, sink the others, raise the tiles of the
@@ -131,9 +131,9 @@ export default class OutcomeGrid extends Visual {
       return { kept, asked, answerText: answer.bottom === 1 ? String(answer.top) : `${answer.top}/${answer.bottom}` };
     });
 
-    let time = 0;
+    const timeline = figure.timeline(evenSteps(lastStep + 1, STEP_TIME));
     figure.button("Replay", () => {
-      time = 0;
+      timeline.restart();
       for (const tile of tiles) {
         tile.height = LEVEL_HEIGHT;
         tile.color.set(PLAIN_COLOR);
@@ -146,7 +146,7 @@ export default class OutcomeGrid extends Visual {
 
     const targetColor = new THREE.Color();
     stage.onFrame = (seconds) => {
-      time += seconds;
+      const time = timeline.advance(seconds);
       const step = Math.min(Math.floor(time / STEP_TIME), lastStep);
 
       // Which given event is running, and how far through its four steps.

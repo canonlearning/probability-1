@@ -24,16 +24,19 @@ const LAST_STEP = 4;
 const CHANGE_RATE = 6; // how quickly balls fade and patches appear
 
 // Sizes, in floor units.
-const BALL_RADIUS = 0.13;
-const BALL_SPACING = 0.3;
-const BALLS_PER_SIDE = 10; // a cell is 10 balls wide, and at most 10 deep
-const CELL_WIDTH = BALLS_PER_SIDE * BALL_SPACING;
+const CELL_WIDTH = 3;
+// A cell is 10 balls wide, and at most 10 deep. A crowd of more than 500
+// uses smaller balls, 20 to a side, so that a full cell stays low.
+const LARGE_CROWD = 500;
 const COLUMN_GAP = 0.9;
 const ROW_GAP = 1.1;
 const FALL_HEIGHT = 4;
 
 const FADED_COLOR = 0xdddbd4;
 const PATCH_OPACITY = 0.3;
+
+// How the balls are packed into a cell.
+type Packing = { ballsPerSide: number; spacing: number; radius: number };
 
 type Cell = { row: number; column: number; count: number; x: number; back: number };
 
@@ -60,10 +63,15 @@ export default class CrowdTable extends Visual {
       throw new Error(`The crowd table needs one count for each row and column, as in counts="20, 20; 10, 70".`);
     }
 
+    const grandTotal = counts.flat().reduce((sum, count) => sum + count, 0);
+    const ballsPerSide = grandTotal > LARGE_CROWD ? 20 : 10;
+    const spacing = CELL_WIDTH / ballsPerSide;
+    const packing: Packing = { ballsPerSide, spacing, radius: spacing * 0.43 };
+
     // Lay out the table. Every column is one cell wide. A row is as deep
     // as its fullest cell.
     const tableWidth = columnNames.length * CELL_WIDTH + (columnNames.length - 1) * COLUMN_GAP;
-    const rowDepths = counts.map((row) => Math.max(...row.map(depthOfCell)));
+    const rowDepths = counts.map((row) => Math.max(...row.map((count) => depthOfCell(count, packing))));
     const tableDepth = rowDepths.reduce((sum, depth) => sum + depth, 0) + (rowNames.length - 1) * ROW_GAP;
     const left = -tableWidth / 2 + 0.8;
     const back = -tableDepth / 2;
@@ -83,8 +91,10 @@ export default class CrowdTable extends Visual {
     const rowTotal = cells.filter((cell) => cell.row === 0).reduce((sum, cell) => sum + cell.count, 0);
 
     const stage = new Stage(figure, {
-      halfWidth: tableWidth / 2 + 2.1,
-      lookAt: [-0.5, 0.9, 0],
+      // Wide enough for the table and its row names, and tall enough for
+      // its depth as seen from this angle.
+      halfWidth: Math.max(tableWidth / 2 + 2.1, tableDepth * 0.6 + 2.2),
+      lookAt: [-0.5, 0.5, 0],
       azimuth: -10,
       elevation: 50,
       gridSize: 30,
@@ -140,7 +150,7 @@ export default class CrowdTable extends Visual {
     const balls: Ball[] = cells.flatMap((cell) =>
       Array.from({ length: cell.count }, (_, index) => ({
         cell,
-        restingPlace: placeInCell(cell, index),
+        restingPlace: placeInCell(cell, index, packing),
         startTime: 0,
         faded: 0,
       })),
@@ -151,13 +161,17 @@ export default class CrowdTable extends Visual {
       balls[ballIndex].startTime = (position / total) * ARRIVE_TIME;
     });
 
-    const mesh = new THREE.InstancedMesh(new THREE.SphereGeometry(BALL_RADIUS, 12, 9), solid(0xffffff), total);
+    const mesh = new THREE.InstancedMesh(new THREE.SphereGeometry(packing.radius, 12, 9), solid(0xffffff), total);
     mesh.frustumCulled = false;
     stage.scene.add(mesh);
 
-    let time = 0;
+    // Step 0 is the balls arriving. The four steps after it are even.
+    const timeline = figure.timeline([
+      0,
+      ...Array.from({ length: LAST_STEP }, (_, step) => FIRST_STEP_AT + step * STEP_TIME),
+    ]);
     figure.button("Replay", () => {
-      time = 0;
+      timeline.restart();
       for (const ball of balls) ball.faded = 0;
     });
     const both = `"${rowNames[0]}" and "${columnNames[0]}"`;
@@ -168,14 +182,16 @@ export default class CrowdTable extends Visual {
 
     const share = (bottom: number) => {
       const reduced = reduce({ top: askedCell.count, bottom });
-      return `${askedCell.count}/${bottom} = ${reduced.top}/${reduced.bottom}`;
+      // A simple fraction is shown reduced, and any other as a percentage.
+      if (reduced.bottom <= 20) return `${askedCell.count}/${bottom} = ${reduced.top}/${reduced.bottom}`;
+      return `${askedCell.count}/${bottom} ≈ ${Math.round((100 * askedCell.count) / bottom)}%`;
     };
 
     const placement = new THREE.Matrix4();
     const color = new THREE.Color();
     const fadedColor = new THREE.Color(FADED_COLOR);
     stage.onFrame = (seconds) => {
-      time += seconds;
+      const time = timeline.advance(seconds);
       const step = time < FIRST_STEP_AT ? 0 : Math.min(1 + Math.floor((time - FIRST_STEP_AT) / STEP_TIME), LAST_STEP);
       const amount = 1 - Math.exp(-seconds * CHANGE_RATE);
 
@@ -235,19 +251,21 @@ function listFrom(written: string, separator: string): string[] {
 }
 
 // How deep a cell with `count` balls is on the floor. A cell fills one
-// layer of 10 by 10 balls, then the layer above it.
-function depthOfCell(count: number): number {
-  return Math.min(Math.ceil(count / BALLS_PER_SIDE), BALLS_PER_SIDE) * BALL_SPACING;
+// layer, then the layer above it.
+function depthOfCell(count: number, packing: Packing): number {
+  const rows = Math.min(Math.ceil(count / packing.ballsPerSide), packing.ballsPerSide);
+  return rows * packing.spacing;
 }
 
-function placeInCell(cell: Cell, index: number): THREE.Vector3 {
-  const acrossStep = index % BALLS_PER_SIDE;
-  const deepStep = Math.floor(index / BALLS_PER_SIDE) % BALLS_PER_SIDE;
-  const layer = Math.floor(index / BALLS_PER_SIDE ** 2);
+function placeInCell(cell: Cell, index: number, packing: Packing): THREE.Vector3 {
+  const { ballsPerSide, spacing, radius } = packing;
+  const acrossStep = index % ballsPerSide;
+  const deepStep = Math.floor(index / ballsPerSide) % ballsPerSide;
+  const layer = Math.floor(index / ballsPerSide ** 2);
   return floor(
-    cell.x - CELL_WIDTH / 2 + (acrossStep + 0.5) * BALL_SPACING,
-    cell.back + (deepStep + 0.5) * BALL_SPACING,
-    BALL_RADIUS + layer * BALL_SPACING,
+    cell.x - CELL_WIDTH / 2 + (acrossStep + 0.5) * spacing,
+    cell.back + (deepStep + 0.5) * spacing,
+    radius + layer * spacing,
   );
 }
 

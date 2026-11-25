@@ -21,6 +21,7 @@
 import {
   ball,
   dividedBy,
+  evenSteps,
   floor,
   floorLine,
   fractionFrom,
@@ -131,7 +132,7 @@ export default class ProbabilityTree extends Visual {
       return { ...path, second, resultLabel };
     });
 
-    let time = 0;
+    const timeline = figure.timeline(evenSteps(LAST_STEP + 1, STEP_TIME));
 
     if (this.getAttribute("slider") === "yes") {
       // The slider moves in steps of half a percent, so the probability
@@ -152,7 +153,7 @@ export default class ProbabilityTree extends Visual {
       );
     }
     figure.button("Replay", () => {
-      time = 0;
+      timeline.restart();
     });
     figure.caption(
       "Each branch carries the probability of that step, given the steps before it. " +
@@ -160,7 +161,7 @@ export default class ProbabilityTree extends Visual {
     );
 
     stage.onFrame = (seconds) => {
-      time += seconds;
+      const time = timeline.advance(seconds);
       const step = Math.min(Math.floor(time / STEP_TIME), LAST_STEP);
       // How far a branch that starts growing at `startStep` has grown.
       const grown = (startStep: number) =>
