@@ -1,0 +1,15 @@
+title: Probability 1
+description: A first university course in probability.
+
+# The practice problems for a lesson are listed here, and the site shows them
+# at the end of the lesson page.
+lessons:
+  - id: conditional-probability
+    problems:
+      - bayes-spam-filter
+
+quizzes:
+  - id: quiz-conditional-probability
+    title: "Quiz: conditional probability"
+    problems:
+      - bayes-spam-filter
