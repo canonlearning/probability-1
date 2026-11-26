@@ -18,15 +18,23 @@ written so far, with five practice problems and interactive visuals.
 
 ## Preview
 
-For now the engine is expected in a sibling folder, `../canon`, with
-`npm install` run in it. Once the site is published, the engine becomes an
-ordinary dependency and this repository can be cloned on its own. Then, in this folder:
+The engine is expected in a sibling folder, `../canon`, with `npm install`
+run in it. Then, in this folder:
 
 - `npm run dev` serves the course at `http://localhost:4000` and reloads the
   page when a file is saved.
 - `npm run build` writes the site to `dist/`.
 
 Each lesson ends with its practice problems, each with a worked solution.
+
+## Publishing
+
+The course is published at
+[canonlearning.ai/probability-1](https://canonlearning.ai/probability-1/).
+On every push to `main`, the GitHub Action in `.github/workflows/publish.yml`
+builds the course and publishes it with GitHub Pages. A fork publishes its
+own site the same way, once Pages is turned on in the fork's settings with
+"GitHub Actions" as the source.
 
 ## Lecture slides
 
