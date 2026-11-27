@@ -18,6 +18,6 @@ lessons:
       - choir-and-instruments
       - at-least-one-six
       - two-batteries
-      - bayes-spam-filter
+      - flagged-email
     lectures:
       - conditional-probability
