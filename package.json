@@ -1,9 +1,16 @@
 {
   "name": "probability-1",
   "private": true,
-  "description": "Probability 1, a Canon Learning course. The engine is the sibling folder ../canon.",
+  "description": "Probability 1, a Canon Learning course.",
   "scripts": {
-    "dev": "node ../canon/src/cli.ts dev",
-    "build": "node ../canon/src/cli.ts build"
+    "dev": "canon dev",
+    "build": "canon build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "canon": "github:canonlearning/canon"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }

@@ -1,2 +1,4 @@
 dist/
 node_modules/
+# No lock file, so "npm install" always gets the newest engine.
+package-lock.json

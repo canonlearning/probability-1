@@ -1,6 +1,6 @@
 # Builds the course and publishes it with GitHub Pages on every push to main.
-# The engine is checked out beside the course, the same layout the build
-# expects on a laptop. In a fork this publishes the fork's own site.
+# "npm install" downloads the engine, canonlearning/canon. In a fork this
+# publishes the fork's own site.
 name: Publish
 
 on:
@@ -25,21 +25,13 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
-        with:
-          path: probability-1
-      - uses: actions/checkout@v7
-        with:
-          repository: canonlearning/canon
-          path: canon
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - run: npm ci
-        working-directory: canon
+      - run: npm install
       - run: npm run build
-        working-directory: probability-1
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: probability-1/dist
+          path: dist
       - id: deploy
         uses: actions/deploy-pages@v5

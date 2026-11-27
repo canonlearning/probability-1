@@ -18,12 +18,14 @@ written so far, with five practice problems and interactive visuals.
 
 ## Preview
 
-The engine is expected in a sibling folder, `../canon`, with `npm install`
-run in it. Then, in this folder:
+With Node 24 or newer, in this folder:
 
+- `npm install` downloads the engine. To get a newer engine later, delete
+  the `node_modules` folder and run it again.
 - `npm run dev` serves the course at `http://localhost:4000` and reloads the
   page when a file is saved.
 - `npm run build` writes the site to `dist/`.
+- `npm run typecheck` checks the TypeScript in `visuals/`.
 
 Each lesson ends with its practice problems, each with a worked solution.
 

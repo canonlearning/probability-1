@@ -12,12 +12,7 @@
       "dom",
       "dom.iterable"
     ],
-    "types": [],
-    "paths": {
-      "canon": [
-        "../canon/src/visual/index.ts"
-      ]
-    }
+    "types": []
   },
   "include": [
     "visuals"
