@@ -21,3 +21,14 @@ lessons:
       - flagged-email
     lectures:
       - conditional-probability
+  - id: bayes-rule
+    summary: which of several cases is behind what we saw.
+    problems:
+      - ice-cream-stand
+      - three-bakers
+      - another-inbox
+      - lost-keys
+      - second-positive-test
+      - three-doors
+    lectures:
+      - bayes-rule

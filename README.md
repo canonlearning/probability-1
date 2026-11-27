@@ -1,8 +1,9 @@
 # Probability 1
 
 A first university course in probability, from
-[Canon Learning](https://github.com/canonlearning/canon). One lesson is
-written so far, with five practice problems and interactive visuals.
+[Canon Learning](https://github.com/canonlearning/canon). Two lessons
+are written so far, each with practice problems, interactive visuals, and a
+lecture deck.
 
 ## Layout
 
