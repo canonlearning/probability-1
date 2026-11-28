@@ -10,8 +10,8 @@
 //
 // The cases and their probabilities are written on the ::visual line:
 //
-//   ::visual{name="case-flow" one="parcel" event="late"
-//     cases="courier 1, courier 2, courier 3"
+//   ::visual{name="case-flow" one="part" event="defective"
+//     cases="machine 1, machine 2, machine 3"
 //     shares="3/5, 3/10, 1/10" rates="1/15, 1/10, 1/5" highlight="3"}
 //
 // `shares` are the probabilities of the cases and `rates` the probabilities
@@ -172,7 +172,7 @@ export default class CaseFlow extends Visual {
       timeline.restart();
     });
     figure.caption(
-      `The thickness of a band is a probability. The band at the left is every ${one}, and each ` +
+      `The thickness of a band is a probability. The band at the left stands for every ${one}, and each ` +
         `branch is one case. The dark band that leaves a branch is "${event}" in that case. ` +
         `${capitalized(names[highlight])} is red.`,
     );
@@ -211,12 +211,12 @@ export default class CaseFlow extends Visual {
       const chosen = names[highlight];
       figure.readout(
         [
-          `The band is every ${one}. Its thickness is 1.`,
+          `The band stands for every ${one}. Its thickness is 1.`,
           `It splits into one branch for each case, as thick as the probability of the case.`,
           `The dark band that leaves each branch is "${event}" in that case.`,
           `The thickness of each dark band is the product of two probabilities.`,
           `The dark bands together: <b>${productText.join(" + ")} = ${totalText}</b>`,
-          `Widened to thickness 1, ${chosen}'s part is <b>${productText[highlight]} &divide; ${totalText} = ${posteriorText[highlight]}</b>`,
+          `Widened to thickness 1, ${chosen}'s share of the stream is <b>${productText[highlight]} &divide; ${totalText} = ${posteriorText[highlight]}</b>`,
         ][step],
       );
     };

@@ -10,8 +10,8 @@
 //
 // The cases and their probabilities are written on the ::visual line:
 //
-//   ::visual{name="case-strips" one="parcel" event="late"
-//     cases="courier 1, courier 2, courier 3"
+//   ::visual{name="case-strips" one="part" event="defective"
+//     cases="machine 1, machine 2, machine 3"
 //     shares="3/5, 3/10, 1/10" rates="1/15, 1/10, 1/5" highlight="3"}
 //
 // `shares` are the probabilities of the cases and `rates` the probabilities
@@ -140,7 +140,7 @@ export default class CaseStrips extends Visual {
             `"${event}" in that case. The bar is the same cases given "${event}". ` +
             `${capitalized(names[highlight])} is red.`
         : `Each strip is one case, and its width is the probability of the case. The depth of its ` +
-            `dark part is the probability of "${event}" in that case. The area of the dark part is ` +
+            `dark piece is the probability of "${event}" in that case. The area of the dark piece is ` +
             `the probability of both. ${capitalized(names[highlight])} is red.`,
     );
 
@@ -246,11 +246,11 @@ export default class CaseStrips extends Visual {
               `and <b>${posteriorText[highlight]}</b> given "${event}" · ` +
               `"${event}" overall: <b>${totalText}</b>`
           : [
-              `The rectangle is every ${one}. Its area is 1.`,
+              `The rectangle stands for every ${one}. Its area is 1.`,
               `We cut it by width: one strip for each case, as wide as its probability.`,
               `The front of each strip is "${event}" in that case.`,
-              `The area of each dark part is its width times its depth.`,
-              `The dark parts together: <b>${areaText.join(" + ")} = ${totalText}</b>`,
+              `The area of each dark piece is its width times its depth.`,
+              `The dark pieces together: <b>${areaText.join(" + ")} = ${totalText}</b>`,
               `${capitalized(chosen)}'s share of the dark area: <b>${areaText[highlight]} &divide; ${totalText} = ${posteriorText[highlight]}</b>`,
             ][step],
       );

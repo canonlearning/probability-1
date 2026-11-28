@@ -3,7 +3,7 @@
 Probability 1 · Lecture slides
 
 > **Notes** For the lesson "Bayes' Rule", which is the reading. These
-> slides do not repeat it: in place of the three couriers they use the
+> slides do not repeat it: in place of the three machines they use the
 > Titanic by class and a search for a wreck in three zones, with their own
 > drawings. Two parts of about 50 minutes each, with a slide between them
 > that says part 1 is done. The right arrow builds a slide up one piece at
@@ -144,10 +144,13 @@ exactly one of them happens.
 > P(A_i \mid B) = \frac{P(A_i)\,P(B \mid A_i)}{P(B)}
 > $$
 
-One term of the sum, over the whole sum.
+$B$ is what we observe, and $A_i$ is one of the cases. $P(B)$ is the sum
+from the law of total probability.
 
-> **Notes** The bottom, $P(B)$, is the sum from the law of total
-> probability. The reading writes it out in full as (2).
+> **Notes** Read it aloud for the Titanic: $B$ is "survived" and $A_i$ is
+> one of the four groups. The top is that group's term of the sum, and the
+> bottom is the whole sum, 0.32. The reading writes the bottom out in full
+> as (2).
 
 ---
 
@@ -311,6 +314,24 @@ Part 2: no counts, and a second observation.
 
 ---
 
+## Bayes' rule for the north zone
+
+$$
+\begin{aligned}
+P(\text{north} \mid \text{nothing})
+  &= \frac{P(\text{north})\,P(\text{nothing} \mid \text{north})}{P(\text{nothing})} \\[2.5ex]
+  &= \frac{\dfrac{2}{5} \cdot \dfrac{1}{10}}{16/25} \\[3.5ex]
+  &= \frac{1/25}{16/25} = \frac{1}{16}
+\end{aligned}
+$$
+
+> **Notes** Three lines. This is the rule from part 1 with the search in
+> place of the Titanic: $B$ is "the search of the north finds nothing" and
+> the cases are the three zones. The bottom, 16/25, is the sum from the
+> tree.
+
+---
+
 ## The map, before and after
 
 ::visual{name="search-map" zones="north, middle, south" priors="2/5, 2/5, 1/5" detection="9/10" searches="north"}
@@ -414,11 +435,11 @@ An observation that is equally likely in every case changes nothing.
 
 ---
 
-## What to take away
+## Summary
 
 - A partition: exactly one of the cases happens
 - Total probability: add one term for each case
-- Bayes' rule: one term over the sum
+- Bayes' rule: the term of one case, divided by the sum
 - A posterior is the prior for the next observation
 
 ---

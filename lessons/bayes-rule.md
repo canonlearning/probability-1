@@ -4,100 +4,112 @@
 observation is in each of several cases, and the rule gives how likely each
 case is, given the observation.
 
-This lesson uses one example. A shop sends its parcels with three couriers.
+This lesson uses one example. A factory makes one kind of part on three
+machines.
 
-- Courier 1 carries 3 parcels in 5, and 1 in 15 of its parcels arrives late.
-- Courier 2 carries 3 parcels in 10, and 1 in 10 of its parcels arrives late.
-- Courier 3 carries 1 parcel in 10, and 1 in 5 of its parcels arrives late.
+- Machine 1 makes 3 parts in 5, and 1 in 15 of its parts is defective.
+- Machine 2 makes 3 parts in 10, and 1 in 10 of its parts is defective.
+- Machine 3 makes 1 part in 10, and 1 in 5 of its parts is defective.
 
-A parcel arrives late. We want the probability that each courier carried it.
+A part is found to be defective. We want the probability that each machine
+made it.
 
-## Count the parcels
+## Count the parts
 
-Suppose the shop sends 1000 parcels. Courier 1 carries 600 of them, courier
-2 carries 300, and courier 3 carries 100. Courier 1 is late with 1 in 15 of
-its 600, which is 40 parcels. In the same way, courier 2 is late with 30
-parcels and courier 3 with 20.
+Suppose the factory makes 1000 parts. Machine 1 makes 600 of them, machine 2
+makes 300, and machine 3 makes 100. Of the 600 parts from machine 1, 1 in 15
+is defective, which is 40 parts. In the same way, 30 of the parts from
+machine 2 are defective, and 20 of the parts from machine 3.
 
-::visual{name="late-parcels"}
+::visual{name="defective-parts"}
 
-|           | Late | On time | Total |
-|-----------|------|---------|-------|
-| Courier 1 | 40   | 560     | 600   |
-| Courier 2 | 30   | 270     | 300   |
-| Courier 3 | 20   | 80      | 100   |
-| Total     | 90   | 910     | 1000  |
+|           | Defective | Good | Total |
+|-----------|-----------|------|-------|
+| Machine 1 | 40        | 560  | 600   |
+| Machine 2 | 30        | 270  | 300   |
+| Machine 3 | 20        | 80   | 100   |
+| Total     | 90        | 910  | 1000  |
 
-We know the parcel is late, so we look only at the 90 late parcels, which
-are at the front of the figure. Courier 1 carried 40 of them, so the
-probability that courier 1 carried the late parcel is $40/90 = 4/9$. For
-courier 2 it is $30/90 = 1/3$, and for courier 3 it is $20/90 = 2/9$.
+We know the part is defective, so we look only at the 90 defective parts,
+which are at the front of the figure. Machine 1 made 40 of them, so the
+probability that machine 1 made the defective part is $40/90 = 4/9$. For
+machine 2 it is $30/90 = 1/3$, and for machine 3 it is $20/90 = 2/9$.
 
-Courier 3 is late 3 times as often as courier 1 (1 parcel in 5 against 1 in
-15). However, the late parcel is half as likely to have come with courier 3
-as with courier 1 ($2/9$ against $4/9$). The reason is that courier 1
-carries 6 times as many parcels, so it has more late parcels even though it
-is late less often.
+Machine 3 makes a defective part 3 times as often as machine 1 (1 part in 5
+against 1 in 15). However, the defective part is half as likely to have come
+from machine 3 as from machine 1 ($2/9$ against $4/9$). The reason is that
+machine 1 makes 6 times as many parts, so it makes more defective parts even
+though a smaller share of its parts is defective.
 
-## The same count with probabilities
+## Bayes' rule for the three machines
 
-The count used 1000 parcels, but the answers do not depend on that number.
-We now find them from the probabilities alone, in the same two steps: first
-the probability that a parcel is late, then each courier's part of it.
+The count used 1000 parts, but the answers do not depend on that number. We
+now find them from the probabilities alone.
 
-Choose one parcel at random. Let $C_1$, $C_2$, and $C_3$ be the events that
-courier 1, courier 2, and courier 3 carried it, and let $L$ be the event
-that it is late.
+Choose one part at random. Let $M_1$, $M_2$, and $M_3$ be the events that
+machine 1, machine 2, and machine 3 made it, and let $D$ be the event that
+it is defective. We want $P(M_3 \mid D)$, and the same for the other two
+machines.
 
 > **On paper**
-> Draw the tree for one parcel: first which courier carries it, with three
-> branches, then whether it is late. Write a probability on every branch and
-> the product at the end of every path. Circle the three paths that end in a
-> late parcel.
+> Draw the tree for one part: first which machine makes it, with three
+> branches, then whether it is defective. Write a probability on every
+> branch and the product at the end of every path. Circle the three paths
+> that end in a defective part.
 
-Three paths end in a late parcel, one for each courier. The probability of
-a path is the product along it, by the multiplication rule, and no parcel
-follows two paths, so we add the three:
+The definition of conditional probability gives
+
+$$
+P(M_3 \mid D) = \frac{P(M_3 \cap D)}{P(D)}.
+$$
+
+The top is the path of the tree through machine 3 that ends in a defective
+part. Its probability is the product along the path, by the multiplication
+rule:
+
+$$
+P(M_3 \cap D) = P(M_3)\,P(D \mid M_3) = \frac{1}{10} \cdot \frac{1}{5} = \frac{2}{100}.
+$$
+
+The bottom is the probability that a part is defective. Three paths end in a
+defective part, one for each machine, and no part follows two paths, so we
+add the three:
 
 $$
 \begin{aligned}
-P(L) &= P(C_1)\,P(L \mid C_1) + P(C_2)\,P(L \mid C_2) + P(C_3)\,P(L \mid C_3) \\[6pt]
+P(D) &= P(M_1)\,P(D \mid M_1) + P(M_2)\,P(D \mid M_2) + P(M_3)\,P(D \mid M_3) \\[6pt]
 &= \frac{3}{5} \cdot \frac{1}{15} + \frac{3}{10} \cdot \frac{1}{10} + \frac{1}{10} \cdot \frac{1}{5} \\[6pt]
 &= \frac{4}{100} + \frac{3}{100} + \frac{2}{100} = \frac{9}{100}.
 \end{aligned}
 $$
 
-Of all the parcels, 9 in 100 arrive late, which is the 90 of 1000 in the
-count.
-
-The second step divides one path by this total. For courier 3, the
-definition of conditional probability gives
+Of all the parts, 9 in 100 are defective, which is the 90 of 1000 in the
+count. With the top and the bottom written out, we have
 
 $$
-P(C_3 \mid L) = \frac{P(C_3 \cap L)}{P(L)} = \frac{2/100}{9/100} = \frac{2}{9}.
+\begin{aligned}
+P(M_3 \mid D) &= \frac{P(M_3)\,P(D \mid M_3)}{P(M_1)\,P(D \mid M_1) + P(M_2)\,P(D \mid M_2) + P(M_3)\,P(D \mid M_3)} \\[6pt]
+&= \frac{2/100}{9/100} = \frac{2}{9}.
+\end{aligned}
 $$
 
-In the same way, $P(C_1 \mid L) = 4/9$ and $P(C_2 \mid L) = 3/9 = 1/3$.
-These are the answers from the count.
+This is Bayes' rule for the three machines. The bottom has one term for each
+machine, and the top is the term of machine 3. For the other two machines
+only the top changes, so $P(M_1 \mid D) = 4/9$ and
+$P(M_2 \mid D) = 3/9 = 1/3$. These are the answers from the count.
 
-The figure shows both steps as a stream, where the thickness of a band is a
-probability. The band of all the parcels splits into a branch for each
-courier, and the dark band that leaves a branch is that courier's late
-parcels. Its thickness is the product at the end of one late path of the
-tree. The three dark bands meet in one stream of thickness $9/100$. Last,
-that stream is widened to thickness 1, and each courier's part of it is the
-probability that the courier carried the late parcel.
+In the figure, the thickness of a band is a probability.
 
-::visual{name="case-flow" one="parcel" event="late" cases="courier 1, courier 2, courier 3" shares="3/5, 3/10, 1/10" rates="1/15, 1/10, 1/5" highlight="3"}
+::visual{name="case-flow" one="part" event="defective" cases="machine 1, machine 2, machine 3" shares="3/5, 3/10, 1/10" rates="1/15, 1/10, 1/5" highlight="3"}
 
-## The two rules
+## The rule in general
 
-Both steps hold for any number of cases, as long as exactly one of the
+The same steps work for any number of cases, as long as exactly one of the
 cases happens. Events $A_1, A_2, \dots, A_n$ form a **partition** when every
-outcome is in exactly one of them (every parcel is carried by exactly one
-courier). Let $B$ be any event (the parcel is late).
+outcome is in exactly one of them (every part is made by exactly one
+machine). Let $B$ be any event (the part is defective).
 
-The first step is the **law of total probability**:
+The sum on the bottom is the **law of total probability**:
 
 $$
 P(B) = P(A_1)\,P(B \mid A_1) + P(A_2)\,P(B \mid A_2) + \dots + P(A_n)\,P(B \mid A_n). \tag{1}
@@ -106,47 +118,41 @@ $$
 It has one term for each case: the probability of the case, times the
 probability of $B$ given that case.
 
-The second step is Bayes' rule:
+Bayes' rule divides one of these terms by the sum:
 
 $$
 P(A_i \mid B) = \frac{P(A_i)\,P(B \mid A_i)}{P(A_1)\,P(B \mid A_1) + \dots + P(A_n)\,P(B \mid A_n)}, \tag{2}
 $$
 
-where $A_i$ is any one of the cases. The denominator is $P(B)$, written out
-with (1), and the numerator is one of its terms. Both rules hold when every
+where $A_i$ is any one of the cases. Both rules hold when every
 $P(A_i) > 0$, and (2) also needs $P(B) > 0$.
 
 ## Prior and posterior
 
-Bayes' rule gave one probability for each courier. To see what the late
-parcel changed, we compare each of them with the probability of that courier
-before we knew the parcel was late.
+Bayes' rule gave one probability for each machine. To see what the defective
+part changed, we compare each of them with the probability of that machine
+before we knew the part was defective.
 
 The probability of a case before the observation is its **prior**
 probability, and the probability of the case given the observation is its
-**posterior** probability. For the couriers:
+**posterior** probability. For the machines:
 
 |           | Prior  | Posterior |
 |-----------|--------|-----------|
-| Courier 1 | $3/5$  | $4/9$     |
-| Courier 2 | $3/10$ | $1/3$     |
-| Courier 3 | $1/10$ | $2/9$     |
+| Machine 1 | $3/5$  | $4/9$     |
+| Machine 2 | $3/10$ | $1/3$     |
+| Machine 3 | $1/10$ | $2/9$     |
 
-In the figure, each courier is a strip, and the width of the strip is the
-courier's prior probability. The bar at the front is the posterior
-probabilities. The strips and the bar have the same total width, so a
-courier whose part of the bar is wider than its strip became more likely.
-The figure writes each probability as a percentage, and its sliders change
-the prior probability of courier 3 and how often courier 3 is late.
+In the figure, the width of a strip is a machine's prior probability, and
+the bar at the front shows the posterior probabilities.
 
-::visual{name="case-strips" one="parcel" event="late" cases="courier 1, courier 2, courier 3" shares="3/5, 3/10, 1/10" rates="1/15, 1/10, 1/5" highlight="3" sliders="yes"}
+::visual{name="case-strips" one="part" event="defective" cases="machine 1, machine 2, machine 3" shares="3/5, 3/10, 1/10" rates="1/15, 1/10, 1/5" highlight="3" sliders="yes"}
 
-A courier becomes more likely when it is late more often than parcels are
-late overall. Courier 3 is late with probability $1/5$, against $9/100$
-overall, so its probability rose from $1/10$ to $2/9$. Courier 1 is late
-with probability $1/15$, which is less than $9/100$, so its probability fell
-from $3/5$ to $4/9$.
+A machine becomes more likely when its parts are defective more often than
+parts are defective overall. For machine 3 this is $1/5$ against $9/100$, so
+its probability rose from $1/10$ to $2/9$. For machine 1 it is $1/15$, which
+is less than $9/100$, so its probability fell from $3/5$ to $4/9$.
 
-Courier 3 rose, but it started from $1/10$, so it is still the least likely
+Machine 3 rose, but it started from $1/10$, so it is still the least likely
 of the three. The posterior probability depends on the prior probability as
-well as on how often each courier is late.
+well as on how often each machine makes a defective part.
