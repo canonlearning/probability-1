@@ -11,6 +11,17 @@ source: https://github.com/canonlearning/probability-1/blob/main
 #   problems  the practice problems shown at its end
 #   lectures  the slide decks for teaching it in class
 lessons:
+  - id: sample-space
+    summary: writing down everything that can happen, and what a question picks out.
+    problems:
+      - two-dice-events
+      - two-books
+      - three-buses
+      - peg-board
+      - until-two-agree
+      - bus-and-train
+    lectures:
+      - sample-space
   - id: conditional-probability
     summary: how learning one thing changes the chance of another.
     problems:
