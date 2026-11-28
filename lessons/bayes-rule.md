@@ -4,8 +4,7 @@
 observation is in each of several cases, and the rule gives how likely each
 case is, given the observation.
 
-This lesson uses one example. A factory makes one kind of part on three
-machines.
+Our example is a factory that makes one kind of part on three machines.
 
 - Machine 1 makes 3 parts in 5, and 1 in 15 of its parts is defective.
 - Machine 2 makes 3 parts in 10, and 1 in 10 of its parts is defective.

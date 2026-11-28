@@ -4,11 +4,11 @@ A **conditional probability** is the probability of an event, given that
 another event is known to have happened. Knowing that the second event
 happened rules out some outcomes, so the probability can change.
 
-This lesson uses one example. A condition affects 1 person in 100, and there
-is a test for it. Of the people who have the condition, 9 in 10 test
+Our example is a medical test. A condition affects 1 person in 100, and
+there is a test for it. Of the people who have the condition, 9 in 10 test
 positive. Of the people who do not have it, 1 in 10 test positive. A person
-tests positive. We want the probability
-that this person has the condition, given the positive test.
+tests positive. We want the probability that this person has the condition,
+given the positive test.
 
 ## Count the people
 
@@ -116,7 +116,7 @@ $$
 This is the answer from the count. The tree needed no crowd, only the three
 probabilities.
 
-The two conditional probabilities in this lesson are different.
+$P(T \mid D)$ and $P(D \mid T)$ are different probabilities.
 $P(T \mid D) = 9/10$ is the probability of a positive test for a person who
 has the condition. $P(D \mid T) = 1/12$ is the probability of the condition
 for a person who tests positive.
